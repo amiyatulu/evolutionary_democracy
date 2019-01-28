@@ -13,7 +13,7 @@ styles=getSampleStyleSheet()
 style_right = ParagraphStyle(name='right', parent=styles['Normal'], alignment=TA_RIGHT)
 Elements=[]
 
-doc = BaseDocTemplate('voting_department_research.pdf',showBoundary=1)
+doc = BaseDocTemplate('voting_department_removal_research.pdf',showBoundary=1)
 
 def setTags():
         doc.canv.setAuthor("Amiya Behera")
@@ -52,11 +52,12 @@ with open('vote_names.csv', newline='') as csvfile:
         for row in reader:
             p0 = Paragraph(str(x) + ". " , style_p)
             p1 = Paragraph('<b>' + row['name'] + " </b>",style_p)
-            data = [[p0, p1, p2]]
-            tbl = Table(data, colWidths=[0.5*inch, None, 0.4*inch])
+            data = [[p0, p1, p2, p2]]
+            tbl = Table(data, colWidths=[0.5*inch, None, 0.4*inch, 0.4*inch])
             st = TableStyle([
                     ('ALIGN', (1, 0), (1, 0), "LEFT"),
                     ('ALIGN', (2, 0), (2, 0), "RIGHT"),
+                    ('ALIGN', (3, 0), (3, 0), "RIGHT"),
                 ])
             tbl.setStyle(st)
             Elements.append(tbl)
