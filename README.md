@@ -14,5 +14,5 @@ python3 voting_pdf_final.py
 
 Generating QR code:
 
-sudo pip3 install qrcode
-qr --factory=svg "Link to all profile pdf" > profile.svg
+sudo pip3 install qrcode   
+qr --factory=svg "Link to all profile pdf" > profile.svg  
