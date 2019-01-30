@@ -8,7 +8,7 @@ The whole process of voting and how it can be done?
 https://iambrainstorming.blogspot.com/2019/01/the-whole-process-of-voting-in-dpos.html    
 
 
-Installation in ubuntu
+## Installation in ubuntu
 
 sudo apt-get install python3-pip  
 sudo pip3 install reportlab  
