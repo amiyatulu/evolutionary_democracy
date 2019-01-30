@@ -1,6 +1,6 @@
 from reportlab.platypus import BaseDocTemplate, Frame, Paragraph, PageBreak, PageTemplate, Table, Image, TableStyle
 from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
-from reportlab.lib.enums import TA_RIGHT, TA_LEFT
+from reportlab.lib.enums import TA_RIGHT, TA_LEFT, TA_CENTER
 from svglib.svglib import svg2rlg
 from reportlab.lib.units import inch
 import csv
@@ -15,6 +15,19 @@ pdfmetrics.registerFont(TTFont('FreeSansBold', 'FreeSansBold.ttf'))
 pdfmetrics.registerFont(TTFont('FreeSerif', 'FreeSerif.ttf'))
 pdfmetrics.registerFont(TTFont('FreeSerifItalic', 'FreeSerifItalic.ttf'))
 
+
+styles=getSampleStyleSheet()
+style_right = ParagraphStyle(name='right', parent=styles['Normal'], alignment=TA_RIGHT)
+
+style_h = ParagraphStyle('He')
+style_h.fontSize = 7
+style_h.leading = style_h.fontSize*1.2
+style_h.fontName = 'Helvetica'
+style_h.alignment = TA_CENTER
+
+Elements=[]
+
+doc = BaseDocTemplate('voting_department_operation_research.pdf',showBoundary=1)
 
 def scale(drawing, scaling_factor):
     """
@@ -45,7 +58,7 @@ class NumberedCanvas(canvas.Canvas):
             self.__dict__.update(state)
             self.draw_qr_code()
             self.draw_voter_index()
-            self.draw_department_name()
+            self.draw_region_dep()
             self.draw_page_number(num_pages)
             canvas.Canvas.showPage(self)
         canvas.Canvas.save(self)
@@ -59,10 +72,21 @@ class NumberedCanvas(canvas.Canvas):
         drawing = svg2rlg("profile.svg")
         d = scale(drawing, scaling_factor=0.5)
         renderPDF.draw(d, self,170*mm,272*mm)
-    def draw_department_name(self):
+    def draw_region_dep(self):
         self.setFont("Helvetica", 7)
-        self.drawString(90*mm, 275*mm,
-            "RD: Research Department")
+        p1 = Paragraph('Region Type: <b>Country</b>', style_h)
+        p2 = Paragraph('Region Name: <b>Peace</b>', style_h)
+        p3 = Paragraph("Department Name: <b>Research</b>", style_h)
+        p4 = Paragraph("Department Code: <b>RD</b>", style_h)
+        (a1w, a1h) = (a2w, a2h) = (a3w, a3h) = (a4w, a4h) = doc.pagesize
+        w1, h1 = p1.wrap(a1w,a1h)
+        w2, h2 = p2.wrap(a2w,a2h)
+        w3, h3 = p3.wrap(a3w,a3h)
+        w4, h4 = p4.wrap(a4w,a4h)
+        p1.drawOn(self, 0, a1h-30)
+        p2.drawOn(self, 0, a2h-40)
+        p3.drawOn(self, 0, a3h-50)
+        p4.drawOn(self, 0, a4h-60)
     def draw_voter_index(self):
         self.setFont("Helvetica", 7)
         self.drawString(25*mm, 275*mm,
@@ -78,11 +102,8 @@ class NumberedCanvas(canvas.Canvas):
 
 
 
-styles=getSampleStyleSheet()
-style_right = ParagraphStyle(name='right', parent=styles['Normal'], alignment=TA_RIGHT)
-Elements=[]
 
-doc = BaseDocTemplate('voting_department_operation_research.pdf',showBoundary=1)
+
 
 def setTags():
         doc.canv.setAuthor("Amiya Behera")

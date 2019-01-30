@@ -1,6 +1,6 @@
 # evolutionary_democracy
 
-## An alternate Democracy:    
+## An Alternate Democracy:    
 https://iambrainstorming.blogspot.com/2019/01/from-hypocrisy-to-democracy-this-way.html  
 
 ## Evoutionary Democracy:  
