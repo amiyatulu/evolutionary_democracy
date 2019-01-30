@@ -1,5 +1,13 @@
 # evolutionary_democracy
 
+## An alternate Democracy:    
+https://iambrainstorming.blogspot.com/2019/01/from-hypocrisy-to-democracy-this-way.html  
+
+## Evoutionary Democracy:  
+The whole process of voting and how it can be done?    
+https://iambrainstorming.blogspot.com/2019/01/the-whole-process-of-voting-in-dpos.html    
+
+
 Installation in ubuntu
 
 sudo apt-get install python3-pip  
